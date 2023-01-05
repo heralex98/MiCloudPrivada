@@ -7,10 +7,17 @@ password = '12345'
 ftp = FTP()
 ftp.connect(host, port)
 ftp.login(user, password)
+
 print(ftp.getwelcome())
 print(ftp.cwd(user))
 
-try:
-    ftp.delete('test.txt')
-except all_errors as error:
-    print(f'Error deleting file: {error}')
+
+archivo = 'horario.xlsx'
+
+def borrar_archivo_ftp(archivo_borrar):
+    try:
+        ftp.delete(archivo_borrar)
+    except all_errors as error:
+        print(f'Error deleting file: {error}')
+
+borrar_archivo_ftp(archivo)

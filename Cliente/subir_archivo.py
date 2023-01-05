@@ -1,6 +1,5 @@
 from ftplib import FTP
 
-###valores de la conexion###
 
 host = '192.168.0.101'
 port = 5000
@@ -12,14 +11,13 @@ ftp.login(user, password)
 print(ftp.getwelcome())
 print(ftp.cwd(user))
 
-###valores de la funcion###
+
 
 archivo = 'horario.xlsx'
 ubicacion_archivo = './archivos_de_prueba/horario.xlsx'
 
-###funcion###
 
-def subir_archivo(archivo_a_subir, ubicacion):
+def subir_archivo_ftp(archivo_a_subir, ubicacion):
     if archivo_a_subir.endswith('.txt'):
         if archivo in ftp.nlst():
             ftp.delete(archivo_a_subir)
@@ -41,4 +39,4 @@ def subir_archivo(archivo_a_subir, ubicacion):
                 ftp.storbinary('STOR ' + archivo_a_subir, image_file)
                 print('se subio el archivo correctamente')
 
-subir_archivo(archivo, ubicacion_archivo)
+subir_archivo_ftp(archivo, ubicacion_archivo)

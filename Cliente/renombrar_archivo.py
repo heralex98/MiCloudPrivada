@@ -10,7 +10,12 @@ ftp.login(user, password)
 print(ftp.getwelcome())
 print(ftp.cwd(user))
 
-try:
-        ftp.rename('test.txt', 'my_file.txt')
-except all_errors as error:
-        print(f'Error no se pudo renombrar el archivo: {error}')
+nombre_original = 'horario.xlsx'
+nombre_nuevo = 'prueba.xlsx'
+def renombrar_archivo_ftp(archivo,nombre):
+        try:
+                ftp.rename(archivo, nombre)
+        except all_errors as error:
+                print(f'Error no se pudo renombrar el archivo: {error}')
+
+renombrar_archivo_ftp(nombre_original,nombre_nuevo)

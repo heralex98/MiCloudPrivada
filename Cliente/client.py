@@ -403,9 +403,9 @@ class MyMainGui(QWidget,Ui_Form):
 
         try:
             if urlparse(host).hostname:
-                self.ftp.connect(host=urlparse(host).hostname, port=21, timeout=10)
+                self.ftp.connect(host=urlparse(host).hostname, port=2121, timeout=10)
             else:
-                self.ftp.connect(host=host, port=21, timeout=10)
+                self.ftp.connect(host=host, port=2121, timeout=10)
             self.login()
         except:
             message = QMessageBox.information(self,'dirección incorrecta','por favor vuelva a ingresar la dirección')

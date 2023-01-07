@@ -10,7 +10,7 @@ def main():
 
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
-    authorizer.add_user('user', '12345', './Almacenamiento', perm='elradfmwMT')
+    authorizer.add_user('user', '12345', './Almacenamiento/user', perm='elradfmwMT')
     authorizer.add_anonymous(os.getcwd())
 
 
@@ -27,7 +27,7 @@ def main():
     #handler.passive_ports = range(60000, 65535)
 
     # Instantiate FTP server class and listen on 0.0.0.0:2121
-    address = ('0.0.0.0', 5000)
+    address = ('0.0.0.0', 21)
     server = FTPServer(address, handler)
 
     # set a limit for connections

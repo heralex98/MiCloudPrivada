@@ -393,7 +393,7 @@ class MyMainGui(QWidget,Ui_Form):
         except ImportError:
             from urllib.parse import urlparse
 
-        result = QInputDialog.getText(self, 'Connect To Host', 'Host Address', QLineEdit.Normal)
+        result = QInputDialog.getText(self, 'HOST', 'IP de Conexión', QLineEdit.Normal)
         if not result[1]:
             return
         try:
@@ -403,12 +403,12 @@ class MyMainGui(QWidget,Ui_Form):
 
         try:
             if urlparse(host).hostname:
-                self.ftp.connect(host=urlparse(host).hostname, port=2121, timeout=10)
+                self.ftp.connect(host=urlparse(host).hostname, port=5000, timeout=10)
             else:
-                self.ftp.connect(host=host, port=2121, timeout=10)
+                self.ftp.connect(host=host, port=5000, timeout=10)
             self.login()
         except:
-            message = QMessageBox.information(self,'dirección incorrecta','por favor vuelva a ingresar la dirección')
+            message = QMessageBox.information(self,'ADVERTENCIA','por favor coloque una dirección valida')
             self.connect()
         
     def login(self):
@@ -422,7 +422,7 @@ class MyMainGui(QWidget,Ui_Form):
         try:
             self.ftp.login(user=user, passwd=passwd)
         except:
-            message = QMessageBox.information(self,'error de inicio de sesión','Error, vuelva a ingresar')
+            message = QMessageBox.information(self,'ADVERTENCIA','ATENCIÓN, el usuario ingresado o contraseña son erroneos')
             self.login_again()
         self.initialize( )
 

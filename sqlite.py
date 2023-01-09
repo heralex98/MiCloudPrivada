@@ -25,7 +25,12 @@ c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
 # M = cambiar el mode o los permisos del archivo
 # T = cambiar la fecha de modificacion
 
-#c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Hernani', '00000', 'elradfmWMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Hernani', '00000', 'elradfmwMT', '')")
+
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba1', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba2', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba3', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba4', '00000', 'elradfmwMT', '')")
 
 conn.commit()
 

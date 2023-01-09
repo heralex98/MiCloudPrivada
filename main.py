@@ -1,8 +1,19 @@
 import os
+import sqlite3
 
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
+
+
+conn = sqlite3.connect('MiCLoudPrivada')
+c = conn.cursor()
+
+def listToString(s):
+    str1 = ""
+    for ele in s:
+        str1 += ele
+    return str1
 
 def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
@@ -10,7 +21,31 @@ def main():
 
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
-    authorizer.add_user('user', '12345', './Almacenamiento/user', perm='elradfmwMT')
+
+    c.execute("SELECT id FROM usuariosFTP")
+    i = c.fetchall()
+    cont = 0
+
+    for n in i:
+        c.execute("SELECT usuario FROM usuariosFTP")
+        usuarioAUX = c.fetchall()
+        usuario = listToString(usuarioAUX[cont])
+        print(usuario)
+
+        c.execute("SELECT contraseña FROM usuariosFTP")
+        passwordAUX = c.fetchall()
+        password = listToString(passwordAUX[cont])
+        print(password)
+
+        c.execute("SELECT permisos FROM usuariosFTP")
+        permisosAUX = c.fetchall()
+        permisos = listToString(permisosAUX[cont])
+        print(permisos)
+
+        authorizer.add_user(usuario, password, './Almacenamiento/user', perm=permisos)
+        print(n)
+        cont = cont+1
+
     authorizer.add_anonymous(os.getcwd())
 
 
@@ -27,7 +62,7 @@ def main():
     #handler.passive_ports = range(60000, 65535)
 
     # Instantiate FTP server class and listen on 0.0.0.0:2121
-    address = ('0.0.0.0', 2121)
+    address = ('0.0.0.0', 5000)
     server = FTPServer(address, handler)
 
     # set a limit for connections

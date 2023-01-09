@@ -31,6 +31,7 @@ c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VAL
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba2', '00000', 'elradfmwMT', '')")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba3', '00000', 'elradfmwMT', '')")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba4', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba5', '00000', 'elradfmwMT', '')")
 
 conn.commit()
 

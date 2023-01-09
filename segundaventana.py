@@ -37,11 +37,11 @@ class Ui_SegundaVentana(object):
         self.pushButton_4.setObjectName("pushButton_4")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(-10, 0, 1021, 631))
-        self.label.setStyleSheet("background-image: url(C://Users//Sergi//Documents//GitHub//MiCloudPrivada//Almacenamiento//user//messi.jpg);\n""background-repeat: no-repeat;\n"
+        self.label.setStyleSheet("background-image: url(.//Almacenamiento//user//messi.jpg);\n""background-repeat: no-repeat;\n"
                                  ""
 "")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("C://Users//Sergi//Documents//GitHub//MiCloudPrivada//Almacenamiento//user//messi.jpg"))
+        self.label.setPixmap(QtGui.QPixmap(".//Almacenamiento//user//messi.jpg"))
         self.label.setScaledContents(True)
         self.label.setWordWrap(False)
         self.label.setObjectName("label")

@@ -1,19 +1,20 @@
 import os
 import sqlite3
-
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 
-
 conn = sqlite3.connect('MiCLoudPrivada')
 c = conn.cursor()
+
+
 
 def listToString(s):
     str1 = ""
     for ele in s:
         str1 += ele
     return str1
+
 
 def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
@@ -42,10 +43,11 @@ def main():
         permisos = listToString(permisosAUX[cont])
         print(permisos)
 
-        authorizer.add_user(usuario, password, './Almacenamiento/user', perm=permisos)
+        authorizer.add_user(usuario, password, './Almacenamiento/'+usuario, perm=permisos)
         print(n)
         cont = cont+1
 
+    authorizer.add_user('admin1', 'admin1', './Almacenamiento', perm='elradfmwMT')
     authorizer.add_anonymous(os.getcwd())
 
 
@@ -72,5 +74,7 @@ def main():
     # start ftp server
     server.serve_forever()
 
+
 if __name__ == '__main__':
     main()
+    crearCarpeta()

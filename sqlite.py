@@ -7,8 +7,9 @@ c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario TEXT NOT NULL,
     contraseña TEXT NOT NULL,
+    carpeta TEXT NOT NULL,
     permisos TEXT NOT NULL,
-    carpeta TEXT) """)
+    almacenamiento INTEGER) """)
 
 # los permisos son:
 # permisos de lectura:
@@ -25,13 +26,15 @@ c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
 # M = cambiar el mode o los permisos del archivo
 # T = cambiar la fecha de modificacion
 
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Hernani', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Hernani', '00000', './Almacenamiento/Hernani', 'elradfmwMT', 0)")
 
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba1', '00000', 'elradfmwMT', '')")
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba2', '00000', 'elradfmwMT', '')")
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba3', '00000', 'elradfmwMT', '')")
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba4', '00000', 'elradfmwMT', '')")
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, permisos, carpeta) VALUES ('Prueba5', '00000', 'elradfmwMT', '')")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba1', '00000', './Almacenamiento/Prueba1', 'elradfmwMT', 0)")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba2', '00000', './Almacenamiento/Prueba2', 'elradfmwMT', 0)")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba3', '00000', './Almacenamiento/Prueba3', 'elradfmwMT', 0)")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba4', '00000', './Almacenamiento/Prueba4', 'elradfmwMT', 0)")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba5', '00000', './Almacenamiento/Prueba5', 'elradfmwMT', 0)")
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba6', '00000', './Almacenamiento/Prueba6', 'elradfmwMT', 5)")
+
 
 conn.commit()
 

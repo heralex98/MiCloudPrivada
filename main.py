@@ -25,7 +25,24 @@ def main():
 
     c.execute("SELECT id FROM usuariosFTP")
     i = c.fetchall()
+    f = i
     cont = 0
+    contC = 0
+
+    for x in f:
+        c.execute("SELECT carpeta FROM usuariosFTP")
+        carpetaAUX = c.fetchall()
+        carpeta = listToString(carpetaAUX[contC])
+        print(carpeta)
+        try:
+            os.mkdir(carpeta)
+            print(x)
+            contC = contC+1
+        except:
+            print(x)
+            contC = contC + 1
+
+
 
     for n in i:
         c.execute("SELECT usuario FROM usuariosFTP")
@@ -42,6 +59,7 @@ def main():
         permisosAUX = c.fetchall()
         permisos = listToString(permisosAUX[cont])
         print(permisos)
+
 
         authorizer.add_user(usuario, password, './Almacenamiento/'+usuario, perm=permisos)
         print(n)

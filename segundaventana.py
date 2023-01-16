@@ -74,7 +74,7 @@ class Ui_SegundaVentana(object):
     def loadProducts(self):
         conn = sqlite3.connect("MiCLoudPrivada")
         c = conn.cursor()
-        sqlquery = "SELECT usuario,contraseña,permisos,carpeta FROM usuariosFTP"
+        sqlquery = "SELECT usuario,contraseña,carpeta,permisos,almacenamiento FROM usuariosFTP"
 
         sqlxd = "SELECT id from usuariosFTP"
         c.execute(sqlxd)

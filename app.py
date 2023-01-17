@@ -102,7 +102,7 @@ class Example(QtWidgets.QMainWindow):
             print(n)
             cont = cont + 1
 
-        self.authorizer.add_user('admin1', 'admin1', './Almacenamiento', perm='elradfmwMT')
+        self.authorizer.add_user('adminCliente', 'adminCliente', './Almacenamiento', perm='elradfmwMT')
 
 
         #user = self.lineEditUser.text()

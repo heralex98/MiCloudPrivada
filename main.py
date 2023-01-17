@@ -23,6 +23,11 @@ def main():
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
 
+    try:
+        os.mkdir('./Almacenamiento')
+    except:
+        print('ya existe carpeta')
+
     c.execute("SELECT usuario FROM usuariosFTP")
     i = c.fetchall()
     f = i

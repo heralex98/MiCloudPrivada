@@ -24,8 +24,10 @@ c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
 # w = almacenar un archivo en el servidor
 # M = cambiar el mode o los permisos del archivo
 # T = cambiar la fecha de modificacion
-c.execute("DELETE FROM usuariosFTP")
-c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Hernani', '00000', './Almacenamiento/Hernani', 'elradfmwMT', 0)")
+
+#c.execute("DELETE FROM usuariosFTP")
+'''
+c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Hernani', '00000', './Almacenamiento/Hernani', 'elradfmwMT', NULL)")
 
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba1', '00000', './Almacenamiento/Prueba1', 'elradfmwMT', 0)")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba2', '00000', './Almacenamiento/Prueba2', 'elradfmwMT', 0)")
@@ -33,7 +35,7 @@ c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, alm
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba4', '00000', './Almacenamiento/Prueba4', 'elradfmwMT', 0)")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba5', '00000', './Almacenamiento/Prueba5', 'elradfmwMT', 0)")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba6', '00000', './Almacenamiento/Prueba6', 'elradfmwMT', 5)")
-
+'''
 
 conn.commit()
 

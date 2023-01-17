@@ -14,7 +14,11 @@ import sqlite3
 def listToString(s):
     str1 = ""
     for ele in s:
-        str1 += ele
+        if ele == s[4]:
+            str1 += ele
+        else:
+            str1 += ele+','
+
     return str1
 
 class Ui_SegundaVentana(object):
@@ -78,6 +82,12 @@ class Ui_SegundaVentana(object):
         self.pushButton_3.clicked.connect(self.deleterow)
         self.pushButton_4.clicked.connect(self.readDataTable)
 
+    def insertRowInDB(self, rowData):
+        conn = sqlite3.connect("MiCLoudPrivada")
+        c = conn.cursor()
+        querySrt = """("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento)"""
+        self.c.execute(querySrt, rowData)
+        self.c.commit()
 
     def agregarfila(self):
         currentRow = self.tableWidget.rowCount()
@@ -87,21 +97,34 @@ class Ui_SegundaVentana(object):
             filaactual = self.tableWidget.currentRow()
             self.tableWidget.removeRow(filaactual)
     def readDataTable(self):
+        conn = sqlite3.connect("MiCLoudPrivada")
+        c = conn.cursor()
         rowCount=self.tableWidget.rowCount()
         columnCount=self.tableWidget.columnCount()
         contador = 0
+        c.execute("DELETE FROM usuariosFTP")
         for row in range(rowCount):
-            rowData = ''
+            rowData = []
             for column in range(columnCount):
                 widgetItem = self.tableWidget.item(row,column)
                 if(widgetItem and widgetItem.text):
-                    rowData = rowData + widgetItem.text()
+                    #rowData = rowData +','+ widgetItem.text()
+                    rowData.append(widgetItem.text())
 
                 else:
-                    rowData= rowData + 'NULL'
-                    print(rowData + '\n')
+                    #rowData= rowData +','+ 'NULL'
+                    rowData.append('')
+                    #rowData1=listToString(rowData)
+                    print(rowData)
+                    #print(rowData1)
                     print (contador)
+                    #self.insertRowInDB(rowData1)
+                    #c.execute("DELETE FROM usuariosFTP")
+                    c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
+                    conn.commit()
+                    #conn.close()
                     contador = contador + 1
+
 
     def loadProducts(self):
         conn = sqlite3.connect("MiCLoudPrivada")
@@ -123,7 +146,7 @@ class Ui_SegundaVentana(object):
         self.tableWidget.setRowCount(cont)
         tablerow = 0
         for row in c.execute(sqlquery):
-            self.tableWidget.setItem(tablerow,0,QtWidgets.QTableWidgetItem(row[0]))
+            self.tableWidget.setItem(tablerow, 0,QtWidgets.QTableWidgetItem(row[0]))
             self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
             self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
             self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))

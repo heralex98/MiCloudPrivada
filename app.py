@@ -11,13 +11,29 @@ from segundaventana import Ui_SegundaVentana
 import sys
 import os
 import threading
- 
+import sqlite3
+
+
+conn = sqlite3.connect('MiCLoudPrivada')
+c = conn.cursor()
+
+def listToString(s):
+    str1 = ""
+    for ele in s:
+        str1 += ele
+    return str1
+
 class Example(QtWidgets.QMainWindow):
     def openWindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_SegundaVentana()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        user = self.lineEditUser.text()
+        passw = self.lineEditPassword.text()
+        if user == 'adminServer'and passw == 'adminServer':
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_SegundaVentana()
+            self.ui.setupUi(self.window)
+            self.window.show()
+        else:
+            QMessageBox.information(self, 'ADVERTENCIA', 'ATENCIÓN, el usuario ingresado o contraseña son erroneos')
 
     def __init__(self):
         super(Example, self).__init__()
@@ -40,16 +56,66 @@ class Example(QtWidgets.QMainWindow):
 
 
     def onClick(self):
-        print('start')
+        print('iniciar')
 
-        user = self.lineEditUser.text()
-        passw = self.lineEditPassword.text()
+        try:
+            os.mkdir('./Almacenamiento')
+        except:
+            print('ya existe carpeta')
+
+        c.execute("SELECT usuario FROM usuariosFTP")
+        i = c.fetchall()
+        f = i
+        cont = 0
+        contC = 0
+
+        for x in f:
+            c.execute("SELECT carpeta FROM usuariosFTP")
+            carpetaAUX = c.fetchall()
+            carpeta = listToString(carpetaAUX[contC])
+            print(carpeta)
+            try:
+                os.mkdir(carpeta)
+                print(x)
+                contC = contC + 1
+            except:
+                print(x)
+                contC = contC + 1
+
+        for n in i:
+            c.execute("SELECT usuario FROM usuariosFTP")
+            usuarioAUX = c.fetchall()
+            usuario = listToString(usuarioAUX[cont])
+            print(usuario)
+
+            c.execute("SELECT contraseña FROM usuariosFTP")
+            passwordAUX = c.fetchall()
+            password = listToString(passwordAUX[cont])
+            print(password)
+
+            c.execute("SELECT permisos FROM usuariosFTP")
+            permisosAUX = c.fetchall()
+            permisos = listToString(permisosAUX[cont])
+            print(permisos)
+
+            self.authorizer.add_user(usuario, password, './Almacenamiento/' + usuario, perm=permisos)
+            print(n)
+            cont = cont + 1
+
+        self.authorizer.add_user('admin1', 'admin1', './Almacenamiento', perm='elradfmwMT')
+
+
+        #user = self.lineEditUser.text()
+        #passw = self.lineEditPassword.text()
         
-        self.authorizer.add_user(user, passw, '.', perm='elrw')
+        #self.authorizer.add_user(user, passw, '.', perm='elrw')
+
+
+
         self.address = ('0.0.0.0', 5000)
         self.server = ThreadedFTPServer(self.address, self.handler)
 
-        QMessageBox.information(self, "FTP Server started", "FTP Server started")
+        QMessageBox.information(self, "ADVERTENCIA", "FTP Server iniciado")
         self.start()
 
 
@@ -62,9 +128,12 @@ class Example(QtWidgets.QMainWindow):
         srv.start()
         
     def onStop(self):
-        print('stop')
-        self.server.close_all()        
-        QMessageBox.information(self, "FTP Server stopped", "FTP Server stopped")
+        try:
+            print('stop')
+            self.server.close_all()
+            QMessageBox.information(self, "ADVERTENCIA", "FTP Server detenido")
+        except:
+            QMessageBox.information(self, "ADVERTENCIA", "No hay un server iniciado")
 
 app = QtWidgets.QApplication([])
 win = Example()

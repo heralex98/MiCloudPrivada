@@ -112,17 +112,11 @@ class Ui_SegundaVentana(object):
                     rowData.append(widgetItem.text())
 
                 else:
-                    #rowData= rowData +','+ 'NULL'
                     rowData.append('')
-                    #rowData1=listToString(rowData)
                     print(rowData)
-                    #print(rowData1)
                     print (contador)
-                    #self.insertRowInDB(rowData1)
-                    #c.execute("DELETE FROM usuariosFTP")
                     c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
                     conn.commit()
-                    #conn.close()
                     contador = contador + 1
 
 

@@ -4,8 +4,7 @@ conn = sqlite3.connect('MiCLoudPrivada')
 c = conn.cursor()
 
 c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    usuario TEXT NOT NULL,
+    usuario TEXT PRIMARY KEY,
     contraseña TEXT NOT NULL,
     carpeta TEXT NOT NULL,
     permisos TEXT NOT NULL,
@@ -25,7 +24,7 @@ c.execute(""" CREATE TABLE IF NOT EXISTS usuariosFTP (
 # w = almacenar un archivo en el servidor
 # M = cambiar el mode o los permisos del archivo
 # T = cambiar la fecha de modificacion
-
+c.execute("DELETE FROM usuariosFTP")
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Hernani', '00000', './Almacenamiento/Hernani', 'elradfmwMT', 0)")
 
 c.execute("INSERT INTO usuariosFTP (usuario, contraseña, carpeta, permisos, almacenamiento) VALUES ('Prueba1', '00000', './Almacenamiento/Prueba1', 'elradfmwMT', 0)")

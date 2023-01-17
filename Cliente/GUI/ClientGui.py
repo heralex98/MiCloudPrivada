@@ -67,6 +67,7 @@ class Ui_Form(object):
         self.Remote_path.setObjectName("Remote_path")
         self.gridLayout.addWidget(self.Remote_path, 1, 6, 1, 3)
 
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 

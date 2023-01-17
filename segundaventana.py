@@ -7,6 +7,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 import sqlite3
 
 def listToString(s):
@@ -18,7 +20,7 @@ def listToString(s):
 class Ui_SegundaVentana(object):
     def setupUi(self, SegundaVentana):
         SegundaVentana.setObjectName("SegundaVentana")
-        SegundaVentana.resize(1004, 628)
+        SegundaVentana.resize(1004, 800)
         SegundaVentana.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(SegundaVentana)
         self.centralwidget.setObjectName("centralwidget")
@@ -36,17 +38,17 @@ class Ui_SegundaVentana(object):
         self.pushButton_4.setGeometry(QtCore.QRect(320, 250, 111, 23))
         self.pushButton_4.setObjectName("pushButton_4")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(-10, 0, 1021, 631))
-        self.label.setStyleSheet("background-image: url(.//Almacenamiento//user//messi.jpg);\n""background-repeat: no-repeat;\n"
+        self.label.setGeometry(QtCore.QRect(-10, 0, 1021, 1060))
+        self.label.setStyleSheet("background-image: url(.//FONDO//Messi2.jpg);\n""background-repeat: no-repeat;\n"
                                  ""
 "")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap(".//Almacenamiento//user//messi.jpg"))
+        self.label.setPixmap(QtGui.QPixmap(".//FONDO//Messi2.jpg"))
         self.label.setScaledContents(True)
         self.label.setWordWrap(False)
         self.label.setObjectName("label")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(100, 340, 571, 151))
+        self.tableWidget.setGeometry(QtCore.QRect(100, 280, 835, 151))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(5)
         self.tableWidget.setRowCount(4)
@@ -60,6 +62,7 @@ class Ui_SegundaVentana(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(160)
         self.label.raise_()
         self.pushButton.raise_()
         self.pushButton_2.raise_()
@@ -71,12 +74,41 @@ class Ui_SegundaVentana(object):
 
         self.retranslateUi(SegundaVentana)
         QtCore.QMetaObject.connectSlotsByName(SegundaVentana)
+        self.pushButton_2.clicked.connect(self.agregarfila)
+        self.pushButton_3.clicked.connect(self.deleterow)
+        self.pushButton_4.clicked.connect(self.readDataTable)
+
+
+    def agregarfila(self):
+        currentRow = self.tableWidget.rowCount()
+        self.tableWidget.insertRow(currentRow)
+    def deleterow(self):
+        if self.tableWidget.rowCount() >0:
+            filaactual = self.tableWidget.currentRow()
+            self.tableWidget.removeRow(filaactual)
+    def readDataTable(self):
+        rowCount=self.tableWidget.rowCount()
+        columnCount=self.tableWidget.columnCount()
+        contador = 0
+        for row in range(rowCount):
+            rowData = ''
+            for column in range(columnCount):
+                widgetItem = self.tableWidget.item(row,column)
+                if(widgetItem and widgetItem.text):
+                    rowData = rowData + widgetItem.text()
+
+                else:
+                    rowData= rowData + 'NULL'
+                    print(rowData + '\n')
+                    print (contador)
+                    contador = contador + 1
+
     def loadProducts(self):
         conn = sqlite3.connect("MiCLoudPrivada")
         c = conn.cursor()
         sqlquery = "SELECT usuario,contraseña,carpeta,permisos,almacenamiento FROM usuariosFTP"
 
-        sqlxd = "SELECT id from usuariosFTP"
+        sqlxd = "SELECT usuario from usuariosFTP"
         c.execute(sqlxd)
         i = c.fetchall()
         cont = 0
@@ -87,6 +119,7 @@ class Ui_SegundaVentana(object):
             cont = cont + 1
 
 
+
         self.tableWidget.setRowCount(cont)
         tablerow = 0
         for row in c.execute(sqlquery):
@@ -95,6 +128,7 @@ class Ui_SegundaVentana(object):
             self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
             self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
             tablerow+=1
+
 
     def retranslateUi(self, SegundaVentana):
         _translate = QtCore.QCoreApplication.translate
@@ -113,6 +147,7 @@ class Ui_SegundaVentana(object):
         item.setText(_translate("SegundaVentana", "Permisos"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("SegundaVentana", "Almacenamiento"))
+
 
 
 if __name__ == "__main__":

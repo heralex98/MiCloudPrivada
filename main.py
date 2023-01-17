@@ -23,7 +23,7 @@ def main():
     # Define a new user having full r/w permissions and a read-only
     # anonymous user
 
-    c.execute("SELECT id FROM usuariosFTP")
+    c.execute("SELECT usuario FROM usuariosFTP")
     i = c.fetchall()
     f = i
     cont = 0

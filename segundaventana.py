@@ -109,15 +109,23 @@ class Ui_SegundaVentana(object):
                 widgetItem = self.tableWidget.item(row,column)
                 if(widgetItem and widgetItem.text):
                     #rowData = rowData +','+ widgetItem.text()
+                    print(widgetItem.text())
+                    print(column)
                     rowData.append(widgetItem.text())
-
                 else:
-                    rowData.append('')
-                    print(rowData)
-                    print (contador)
-                    c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
-                    conn.commit()
-                    contador = contador + 1
+                    if column == 2:
+                        widgetItem2 = self.tableWidget.item(row, 0)
+                        rowData.append('./Almacenamiento/'+widgetItem2.text())
+                    ##elif column == 3
+
+                    else:
+                        rowData.append('')
+                        #print(rowData)
+                        #print (contador)
+                        c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
+                        conn.commit()
+                        contador = contador + 1
+        self.loadProducts()
 
 
     def loadProducts(self):

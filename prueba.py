@@ -44,10 +44,7 @@ class Ui_MainWindow(object):
         self.pushButton_5.setGeometry(QtCore.QRect(460, 230, 75, 23))
         self.pushButton_5.setObjectName("pushButton_5")
         self.pushButton_5.clicked.connect(self.openWindow)
-        self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_6.setGeometry(QtCore.QRect(460, 270, 75, 23))
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.pushButton_6.clicked.connect(self.IniciarServer)
+
 
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(440, 150, 113, 20))
@@ -81,82 +78,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Usuario"))
         self.label_2.setText(_translate("MainWindow", "Contraseña"))
 
-    def IniciarServer(self):
-        # Instantiate a dummy authorizer for managing 'virtual' users
-        authorizer = DummyAuthorizer()
 
-        # Define a new user having full r/w permissions and a read-only
-        # anonymous user
-
-        try:
-            os.mkdir('./Almacenamiento')
-        except:
-            print('ya existe carpeta')
-
-        c.execute("SELECT usuario FROM usuariosFTP")
-        i = c.fetchall()
-        f = i
-        cont = 0
-        contC = 0
-
-        for x in f:
-            c.execute("SELECT carpeta FROM usuariosFTP")
-            carpetaAUX = c.fetchall()
-            carpeta = listToString(carpetaAUX[contC])
-            print(carpeta)
-            try:
-                os.mkdir(carpeta)
-                print(x)
-                contC = contC + 1
-            except:
-                print(x)
-                contC = contC + 1
-
-        for n in i:
-            c.execute("SELECT usuario FROM usuariosFTP")
-            usuarioAUX = c.fetchall()
-            usuario = listToString(usuarioAUX[cont])
-            print(usuario)
-
-            c.execute("SELECT contraseña FROM usuariosFTP")
-            passwordAUX = c.fetchall()
-            password = listToString(passwordAUX[cont])
-            print(password)
-
-            c.execute("SELECT permisos FROM usuariosFTP")
-            permisosAUX = c.fetchall()
-            permisos = listToString(permisosAUX[cont])
-            print(permisos)
-
-            authorizer.add_user(usuario, password, './Almacenamiento/' + usuario, perm=permisos)
-            print(n)
-            cont = cont + 1
-
-        authorizer.add_user('admin1', 'admin1', './Almacenamiento', perm='elradfmwMT')
-        authorizer.add_anonymous(os.getcwd())
-
-        # Instantiate FTP handler class
-        handler = FTPHandler
-        handler.authorizer = authorizer
-
-        # Define a customized banner (string returned when client connects)
-        handler.banner = "pyftpdlib based ftpd ready."
-
-        # Specify a masquerade address and the range of ports to use for
-        # passive connections.  Decomment in case you're behind a NAT.
-        # handler.masquerade_address = '151.25.42.11'
-        # handler.passive_ports = range(60000, 65535)
-
-        # Instantiate FTP server class and listen on 0.0.0.0:2121
-        address = ('0.0.0.0', 5000)
-        server = FTPServer(address, handler)
-
-        # set a limit for connections
-        server.max_cons = 256
-        server.max_cons_per_ip = 5
-
-        # start ftp server
-        server.serve_forever()
 
 
 if __name__ == "__main__":

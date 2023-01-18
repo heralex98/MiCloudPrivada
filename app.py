@@ -93,25 +93,21 @@ class Example(QtWidgets.QMainWindow):
             password = listToString(passwordAUX[cont])
             print(password)
 
+            c.execute("SELECT carpeta FROM usuariosFTP")
+            carpetaAUX = c.fetchall()
+            carpeta = listToString(carpetaAUX[cont])
+            print(carpeta)
+
             c.execute("SELECT permisos FROM usuariosFTP")
             permisosAUX = c.fetchall()
             permisos = listToString(permisosAUX[cont])
             print(permisos)
 
-            self.authorizer.add_user(usuario, password, './Almacenamiento/' + usuario, perm=permisos)
+            self.authorizer.add_user(usuario, password, carpeta, perm=permisos)
             print(n)
             cont = cont + 1
 
         self.authorizer.add_user('adminCliente', 'adminCliente', './Almacenamiento', perm='elradfmwMT')
-
-
-        #user = self.lineEditUser.text()
-        #passw = self.lineEditPassword.text()
-        
-        #self.authorizer.add_user(user, passw, '.', perm='elrw')
-
-
-
         self.address = ('0.0.0.0', 5000)
         self.server = ThreadedFTPServer(self.address, self.handler)
 

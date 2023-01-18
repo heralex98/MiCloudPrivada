@@ -75,7 +75,7 @@ class Example(QtWidgets.QMainWindow):
             carpeta = listToString(carpetaAUX[contC])
             print(carpeta)
             try:
-                os.mkdir(carpeta)
+                os.mkdir('./Almacenamiento/'+carpeta)
                 print(x)
                 contC = contC + 1
             except:
@@ -103,7 +103,7 @@ class Example(QtWidgets.QMainWindow):
             permisos = listToString(permisosAUX[cont])
             print(permisos)
 
-            self.authorizer.add_user(usuario, password, carpeta, perm=permisos)
+            self.authorizer.add_user(usuario, password, './Almacenamiento/'+carpeta, perm=permisos)
             print(n)
             cont = cont + 1
 

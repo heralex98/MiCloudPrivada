@@ -8,6 +8,7 @@ from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
 from segundaventana import Ui_SegundaVentana
+from PyQt5 import QtCore, QtGui
 import sys
 import os
 import threading
@@ -52,6 +53,15 @@ class Example(QtWidgets.QMainWindow):
         # set a limit for connections
         self.max_cons = 256
         self.max_cons_per_ip = 5
+
+        self.label_4.setGeometry(QtCore.QRect(0, 0, 414, 228))
+        self.label_4.setStyleSheet("background-image: url(.//FONDO//ita.jpg);\n""background-repeat: no-repeat;\n"
+                                 ""
+                                 "")
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap(".//FONDO//ita.jpg"))
+        self.label_4.setScaledContents(True)
+        self.label_4.setWordWrap(False)
 
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>189</height>
+    <width>414</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,9 @@
   <property name="windowIcon">
    <iconset>
     <normaloff>../../../../usr/share/icons/gnome/32x32/places/network-server.png</normaloff>../../../../usr/share/icons/gnome/32x32/places/network-server.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -28,7 +31,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Username</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Username&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEditUser">
@@ -51,7 +54,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Password</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Password&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEditPassword">
@@ -67,7 +70,7 @@
    <widget class="QPushButton" name="pushButtonStart">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>330</x>
       <y>40</y>
       <width>75</width>
       <height>23</height>
@@ -80,7 +83,7 @@
    <widget class="QPushButton" name="pushButtonStop">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>330</x>
       <y>80</y>
       <width>75</width>
       <height>23</height>
@@ -106,18 +109,54 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>340</x>
       <y>10</y>
       <width>47</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>SERVER</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;SERVER&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>10</y>
+      <width>301</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="FONDO/fondo.qrc">:/newPrefix/ita.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <zorder>label_4</zorder>
+   <zorder>label</zorder>
+   <zorder>lineEditUser</zorder>
+   <zorder>label_2</zorder>
+   <zorder>lineEditPassword</zorder>
+   <zorder>pushButtonStart</zorder>
+   <zorder>pushButtonStop</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>label_3</zorder>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="FONDO/fondo.qrc"/>
+ </resources>
  <connections/>
 </ui>

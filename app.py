@@ -113,7 +113,7 @@ class Example(QtWidgets.QMainWindow):
             permisos = listToString(permisosAUX[cont])
             print(permisos)
 
-            self.authorizer.add_user(usuario, password, carpeta, perm=permisos)
+            self.authorizer.add_user(usuario, password, './Almacenamiento/'+carpeta, perm=permisos)
             print(n)
             cont = cont + 1
 

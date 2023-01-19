@@ -88,11 +88,11 @@ class MyMainGui(QWidget,Ui_Form):
         item = self.Local_Filelist.currentItem()
         # item.setFlags(Qt.ItemIsEditable)
         menu = QMenu(self.Local_Filelist)
-        refresh = menu.addAction("actualizar")
         mkdir = menu.addAction("nueva carpeta")
         newfile = menu.addAction("nuevo archivo")
         rename = menu.addAction("cambiar nombre")
         remove = menu.addAction("eliminar")
+        refresh = menu.addAction("actualizar")
         action = menu.exec_(self.Local_Filelist.mapToGlobal(pos))
 
         # refresh
@@ -167,12 +167,12 @@ class MyMainGui(QWidget,Ui_Form):
         item = self.Remote_Filelist.currentItem()
         # item.setFlags(Qt.ItemIsEditable)
         menu = QMenu(self.Remote_Filelist)
-        refresh = menu.addAction("actualizar")
         newfile = menu.addAction("nuevo archivo")
         mkdir = menu.addAction("nueva carpeta")
         rename = menu.addAction("cambiar nombre")
         edit = menu.addAction("editar")
         remove = menu.addAction("eliminar")
+        refresh = menu.addAction("actualizar")
         
         action = menu.exec_(self.Remote_Filelist.mapToGlobal(pos))
 

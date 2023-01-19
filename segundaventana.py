@@ -96,6 +96,7 @@ class Ui_SegundaVentana(object):
         if self.tableWidget.rowCount() >0:
             filaactual = self.tableWidget.currentRow()
             self.tableWidget.removeRow(filaactual)
+
     def readDataTable(self):
         conn = sqlite3.connect("MiCLoudPrivada")
         c = conn.cursor()
@@ -108,22 +109,21 @@ class Ui_SegundaVentana(object):
             for column in range(columnCount):
                 widgetItem = self.tableWidget.item(row,column)
                 if(widgetItem and widgetItem.text):
-                    #rowData = rowData +','+ widgetItem.text()
-                    print(widgetItem.text())
-                    print(column)
-                    rowData.append(widgetItem.text())
-                else:
-                    if column == 2:
-                        widgetItem2 = self.tableWidget.item(row, 0)
-                        rowData.append('./Almacenamiento/'+widgetItem2.text())
-                    ##elif column == 3
-
+                    if column == 3:
+                        widget = self.tableWidget.cellWidget(row, column)
+                        if isinstance(widget, QComboBox):
+                            current_value = widget.currentText()
+                            if current_value == 'lectura':
+                                rowData.append('elr')
+                            else:
+                                rowData.append('elradfmwMT')
                     else:
-                        rowData.append('')
-                        #print(rowData)
-                        #print (contador)
-                        c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
-                        contador = contador + 1
+                        rowData.append(widgetItem.text())
+                else:
+                    rowData.append('')
+                    print(rowData)
+                    c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
+                    contador = contador + 1
         conn.commit()
         self.loadProducts()
 
@@ -143,16 +143,26 @@ class Ui_SegundaVentana(object):
             print(n)
             cont = cont + 1
 
-
-
         self.tableWidget.setRowCount(cont)
         tablerow = 0
+
         for row in c.execute(sqlquery):
-            self.tableWidget.setItem(tablerow, 0,QtWidgets.QTableWidgetItem(row[0]))
+            self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(row[0]))
             self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
             self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
-            self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(row[3]))
+            if row[3] == 'elradfmwMT':
+                self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                comboBox = QComboBox()
+                comboBox.addItems(['escritura', 'lectura'])
+                self.tableWidget.setCellWidget(tablerow, 3, comboBox)
+            else:
+                self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                comboBox = QComboBox()
+                comboBox.addItems(['lectura', 'escritura'])
+                self.tableWidget.setCellWidget(tablerow, 3, comboBox)
             tablerow+=1
+
+
 
 
     def retranslateUi(self, SegundaVentana):
@@ -171,7 +181,7 @@ class Ui_SegundaVentana(object):
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("SegundaVentana", "Permisos"))
         item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("SegundaVentana", "Almacenamiento"))
+        item.setText(_translate("SegundaVentana", ""))
 
 
 

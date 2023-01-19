@@ -123,8 +123,8 @@ class Ui_SegundaVentana(object):
                         #print(rowData)
                         #print (contador)
                         c.execute("INSERT INTO usuariosFTP VALUES (?, ?, ?, ?, ?)", (rowData))
-                        conn.commit()
                         contador = contador + 1
+        conn.commit()
         self.loadProducts()
 
 
